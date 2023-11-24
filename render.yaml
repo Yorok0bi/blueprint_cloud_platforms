@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: cloud-web
+    runtime: node
+    region: frankfurt
+    plan: free
+    branch: master
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: database_url
+        fromDatabase:
+          name: cloud-db
+          property: connectionString
+
+databases:
+  - name: cloud-db
+    region: frankfurt
+    plan: free
+    databaseName: cloud
+    user: cloud
